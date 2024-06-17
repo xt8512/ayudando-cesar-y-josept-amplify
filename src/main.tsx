@@ -9,6 +9,9 @@ import { FluentProvider, webLightTheme } from '@fluentui/react-components';
 
 import App from './App.tsx'
 
+import { handleStartConfig } from './amplify/actions/StartConfig.ts';
+handleStartConfig();
+
 import './index.css';
 
 if (typeof global === 'undefined') {
