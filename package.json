@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-amplify/api-rest": "^3.0.30",
     "@aws-amplify/auth": "^5.3.3",
     "@aws-amplify/core": "^5.1.13",
     "@fluentui/react-components": "^9.54.1",
@@ -17,7 +18,8 @@
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

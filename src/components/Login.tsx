@@ -9,8 +9,10 @@ import {
 import { useState } from "react";
 
 const initState = {
-  username: "juanm.hidalgo@softtek.com",
-  password: "L2m9CV35JT@1",
+  // username: "juanm.hidalgo@softtek.com",
+  // password: "L2m9CV35JT@1",
+  username: "josehparedes255@gmail.com",
+  password: "Laravel20$$12",
 };
 
 export const Login = () => {

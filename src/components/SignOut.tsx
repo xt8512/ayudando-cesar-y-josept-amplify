@@ -1,3 +1,4 @@
+import { handleGetCurrentCredentials } from "@/amplify/actions/GetCurrentCredentials";
 import { handleGetCurrentSession } from "@/amplify/actions/GetCurrentSession";
 import { handleGetCurrentUser } from "@/amplify/actions/GetCurrentUser";
 import { handleSignOut } from "@/amplify/actions/SignOut";
@@ -26,6 +27,13 @@ export const SignOut = () => {
           secondaryContent="status"
         >
           SIGN-OUT
+        </CompoundButton>
+
+        <CompoundButton
+          onClick={() => handleGetCurrentCredentials()}
+          secondaryContent="status"
+        >
+          CURRENT CRENDECIALS
         </CompoundButton>
       </div>
     </Card>

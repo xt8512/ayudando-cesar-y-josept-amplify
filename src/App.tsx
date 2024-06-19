@@ -1,4 +1,4 @@
-import { Login, Otp, SignOut } from "@/components";
+import { Login, Otp, SignOut, TestApi } from "@/components";
 
 function App() {
   return (
@@ -7,6 +7,7 @@ function App() {
         <Login />
         <Otp />
         <SignOut />
+        <TestApi />
       </div>
     </div>
   );
