@@ -1,14 +1,14 @@
 import { Auth, type CognitoUser } from "@aws-amplify/auth";
 
-export async function handleVerifyOTP(user: CognitoUser) {
+export async function handleVerifyOTP(
+  user: CognitoUser,
+  challengeResponse: string
+) {
   if (user?.challengeName === "CUSTOM_CHALLENGE") {
     try {
-      const code = document.getElementById("code") as HTMLInputElement;
-      const challengeResponse = code ? code.value : "";
-
       const challengeAnswerResponse = await Auth.sendCustomChallengeAnswer(
         user,
-        challengeResponse
+        challengeResponse ?? ""
       );
       console.log("CUSTOM AUTH: ", challengeAnswerResponse);
 

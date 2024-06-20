@@ -5,7 +5,7 @@ type SignInAmplifyProps = {
   username: string;
   password: string;
   recaptcha: string;
-}
+};
 
 export async function handleSignInAmplify(props: SignInAmplifyProps) {
   const { username, password, recaptcha } = props;
@@ -13,41 +13,44 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
   // const deviceKey = "us-east-2_6e6d8955-11d2-4a9a-b446-077be7443f03" // no record
   // const deviceKey = "null" // default
 
-  const deviceKey = getDeviceKey(username)
+  const deviceKey = getDeviceKey(username);
   const idClient = generateIdToAmplify();
 
+  const clientMeta = {
+    idClient,
+    userAgent: window.navigator.userAgent,
+    channelCode: "BRK",
+    deviceKey,
+    recaptcha,
+  };
+
   try {
-    const user = await Auth.signIn(username, password, {
-      idClient,
-      userAgent: window.navigator.userAgent,
-      channelCode: "BRK",
-      deviceKey,
-      recaptcha,
-    });
+    await Auth.signIn(username, password, clientMeta);
+  } catch (error) {
+    console.error("Error signing in:", error);
+  }
 
-    // } catch (error) {
-    //   console.error("Error signing in:", error);
-    // }
+  // validar login usuario
 
-    // validar login usuario
+  // si response es correcto, entonces go HOME
 
-    // si response es correcto, entonces go HOME
+  // VALIDACION SI ESTA RECORDADO EL DEVICEKEY
+  // obtener deviceKey
+  // const deviceKey = await Auth.getDeviceKey(); // SI NO HAY -- ENVIA ERROR
+  // validar devicekey recordado
+  // const fetchDeviceKey = await Auth.fetchDeviceKey();
 
-    // VALIDACION SI ESTA RECORDADO EL DEVICEKEY
-    // obtener deviceKey
-    // const deviceKey = await Auth.getDeviceKey(); // SI NO HAY -- ENVIA ERROR
-    // validar devicekey recordado
-    // const fetchDeviceKey = await Auth.fetchDeviceKey();
+  // LOGOUT
+  // try {
+  //   await Auth.signOut();
+  // } catch (error) {
+  //   console.log("Error signing out: ", error);
+  // }
 
-    // LOGOUT
-    // try {
-    //   await Auth.signOut();
-    // } catch (error) {
-    //   console.log("Error signing out: ", error);
-    // }
+  const password2 = "";
 
-    // try {
-    // const user = await Auth.signIn(username, password);
+  try {
+    const user = await Auth.signIn(username, password2, clientMeta);
 
     console.log("USER: ", user);
 
