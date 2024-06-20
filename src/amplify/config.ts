@@ -25,6 +25,15 @@ export const awsConfig = {
     region: import.meta.env.VITE_AWS_COGNITO_REGION,
     mandatorySignIn: true,
   },
+  API: {
+    endpoints: [
+      {
+        name: "PRUEBA",
+        endpoint: import.meta.env.VITE_AWS_API,
+        region: import.meta.env.VITE_AWS_PROJECT_REGION,
+      }
+    ],
+  },
 };
 
 

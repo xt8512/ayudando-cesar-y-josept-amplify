@@ -17,7 +17,15 @@ export function generateIdToAmplify() {
   return clientId;
 }
 
+export function getDeviceKey(username: string) {
+  const userPoolId = awsConfig.Auth.userPoolWebClientId;
+  const key = `CognitoIdentityServiceProvider.${userPoolId}.${username}.deviceKey`;
+  const deviceKey = localStorage.getItem(key);
+
+  return deviceKey ?? "null";
+}
+
 export async function handleStartConfig() {
-  console.log("iniciando con previewConfig");
+  console.log("iniciando con ENV");
   return Auth.configure(awsConfig);
 }
