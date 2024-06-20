@@ -1,7 +1,14 @@
 import { Auth } from "@aws-amplify/auth";
 import { generateIdToAmplify, getDeviceKey } from "./StartConfig";
 
-export async function handleSignInAmplify(username: string, password: string) {
+type SignInAmplifyProps = {
+  username: string;
+  password: string;
+  recaptcha: string;
+}
+
+export async function handleSignInAmplify(props: SignInAmplifyProps) {
+  const { username, password, recaptcha } = props;
   // const deviceKey = "us-east-2_687481f7-6270-4d9d-a55a-2d134bc6bd9d"; // record
   // const deviceKey = "us-east-2_6e6d8955-11d2-4a9a-b446-077be7443f03" // no record
   // const deviceKey = "null" // default
@@ -15,7 +22,7 @@ export async function handleSignInAmplify(username: string, password: string) {
       userAgent: window.navigator.userAgent,
       channelCode: "BRK",
       deviceKey,
-      recaptcha: "TOKEN",
+      recaptcha,
     });
 
     // } catch (error) {

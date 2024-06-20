@@ -7,6 +7,7 @@ import {
   InputProps,
 } from "@fluentui/react-components";
 import { useState } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const initState = {
   // username: "juanm.hidalgo@softtek.com",
@@ -18,6 +19,8 @@ const initState = {
 };
 
 export const Login = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [form, setForm] = useState(initState);
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +34,16 @@ export const Login = () => {
   const onClick = async () => {
     setLoading(true);
     try {
-      await handleSignInAmplify(form.username, form.password);
+      if (!executeRecaptcha) throw new Error('Execute recaptcha not yet available');
+
+      const token: string = await executeRecaptcha('register');
+
+      await handleSignInAmplify({
+        username: form.username, 
+        password: form.password,
+        recaptcha: token,
+      });
+
     } catch (error) {
       console.log("Error in Login current:", error);
     } finally {
