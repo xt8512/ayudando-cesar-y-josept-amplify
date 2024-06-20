@@ -24,7 +24,7 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
     userAgent: window.navigator.userAgent,
     channelCode: "BRK",
     deviceKey,
-    encryptedRecaptcha,
+    recaptcha: encryptedRecaptcha,
   };
 
   try {
