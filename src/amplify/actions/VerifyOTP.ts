@@ -1,9 +1,11 @@
 import { Auth, type CognitoUser } from "@aws-amplify/auth";
 
 export async function handleVerifyOTP(
-  user: CognitoUser,
+  user: CognitoUser | null,
   challengeResponse: string
 ) {
+  if (!user) throw new Error("User is required");
+
   if (user?.challengeName === "CUSTOM_CHALLENGE") {
     try {
       const challengeAnswerResponse = await Auth.sendCustomChallengeAnswer(

@@ -5,7 +5,11 @@ export const handleSendCustomChallengeAnswer = async (username: string) => {
   const idClient = generateIdToAmplify();
 
   try {
-    const user = await Auth.signIn(username, "");
+    const user = await Auth.signIn(username, "", {
+      idClient,
+      userAgent: window.navigator.userAgent,
+      channelCode: "BRK",
+    });
 
     const challengeAnswerResponse = await Auth.sendCustomChallengeAnswer(
       user,
@@ -17,10 +21,12 @@ export const handleSendCustomChallengeAnswer = async (username: string) => {
       }
     );
 
-    console.log(challengeAnswerResponse);
+    console.log("CUSTOM AUTH: ", challengeAnswerResponse);    
 
-    return challengeAnswerResponse; 
+    return user; 
   } catch (e) {
     console.error("Error in handleSendCustomChallengeAnswer: ", e);
+
+    return null
   }
 };
