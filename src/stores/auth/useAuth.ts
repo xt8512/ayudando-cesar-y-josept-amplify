@@ -8,6 +8,8 @@ import type { InputProps } from "@fluentui/react-components";
 // password: "Laravel20$$12",
 // username: "jhonatan.valenzuela.19@outlook.com",
 // password: "R6Ut-+L;bd",
+// username: "sixto.mujica@softtek.com"
+// password: "2N@DuTs<"T"
 // };
 
 type State = {
@@ -17,6 +19,7 @@ type State = {
 
 type Action = {
   onChange: InputProps["onChange"];
+  setForm: (form: State) => void;
 };
 
 export const useAuth = create<State & Action>((set) => ({
@@ -27,4 +30,5 @@ export const useAuth = create<State & Action>((set) => ({
       ...state,
       [ev.target.name]: ev.target.value,
     })),
+  setForm: (form) => set(form),
 }));

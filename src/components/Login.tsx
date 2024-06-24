@@ -5,17 +5,18 @@ import {
   CompoundButton,
   Field,
   Input,
+  Spinner,
 } from "@fluentui/react-components";
 import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 // const initState = {
-  // username: "juanm.hidalgo@softtek.com",
-  // password: "L2m9CV35JT@1",
-  // username: "josehparedes255@gmail.com",
-  // password: "Laravel20$$12",
-  // username: "jhonatan.valenzuela.19@outlook.com",
-  // password: "R6Ut-+L;bd",
+// username: "juanm.hidalgo@softtek.com",
+// password: "L2m9CV35JT@1",
+// username: "josehparedes255@gmail.com",
+// password: "Laravel20$$12",
+// username: "jhonatan.valenzuela.19@outlook.com",
+// password: "R6Ut-+L;bd",
 // };
 
 export const Login = () => {
@@ -26,7 +27,8 @@ export const Login = () => {
   const onClick = async () => {
     setLoading(true);
     try {
-      if (!executeRecaptcha) throw new Error("Execute recaptcha not yet available");
+      if (!executeRecaptcha)
+        throw new Error("Execute recaptcha not yet available");
 
       const recaptcha: string = await executeRecaptcha("register");
 
@@ -44,27 +46,30 @@ export const Login = () => {
 
   return (
     <Card className="row-span-3">
-      <div className="flex gap-3">
+      <div className="grid grid-cols-3 gap-3">
         <CompoundButton
           disabled={loading}
           onClick={onClick}
-          secondaryContent="status"
+          secondaryContent={loading ? "" : "status"}
+          className="col-span-1"
         >
-          {loading ? "Loading..." : "Login in"}
+          {loading ? <Spinner label={"Loading"} /> : "Login in"}
         </CompoundButton>
 
-        <div className="flex flex-col w-full">
-          <Field label="Usuario">
-            <Input value={username} name="username" onChange={onChange} />
-          </Field>
-          <Field label="Contraseña">
-            <Input
-              value={password}
-              name="password"
-              type="password"
-              onChange={onChange}
-            />
-          </Field>
+        <div className="col-span-2">
+          <div className="flex flex-col w-full">
+            <Field label="Usuario">
+              <Input value={username} name="username" onChange={onChange} />
+            </Field>
+            <Field label="Contraseña">
+              <Input
+                value={password}
+                name="password"
+                type="password"
+                onChange={onChange}
+              />
+            </Field>
+          </div>
         </div>
       </div>
     </Card>

@@ -2,23 +2,41 @@ import { handleSendCustomChallengeAnswer } from "@/amplify/actions/SendCustomCha
 import { handleVerifyOTP } from "@/amplify/actions/VerifyOTP";
 import { useAuth, useOtp } from "@/stores/auth";
 import { useCurrentUser } from "@/stores/auth/useCurrentUser";
-import { Card, CompoundButton, Field, Input } from "@fluentui/react-components";
+import {
+  Card,
+  CompoundButton,
+  Field,
+  Input,
+  Spinner,
+} from "@fluentui/react-components";
+import { useState } from "react";
 
 export const Otp = () => {
   const { username } = useAuth();
   const { code, onChange } = useOtp();
   const { user, setUser } = useCurrentUser();
+  const [loading, setLoading] = useState(false);
 
   const handleSendEmail = async () => {
-    const new_user = await handleSendCustomChallengeAnswer(username);
-    setUser(new_user);
+    setLoading(true);
+    try {
+      const new_user = await handleSendCustomChallengeAnswer(username);
+      setUser(new_user);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Card>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <CompoundButton secondaryContent="resend" onClick={handleSendEmail}>
-          LOGIN TOTP
+        <CompoundButton
+          disabled={loading}
+          secondaryContent={loading ? "" : "resend"}
+          onClick={handleSendEmail}
+        >
+          {loading ? <Spinner label={"Enviando correo"} /> : "LOGIN TOTP"}
         </CompoundButton>
 
         <Field label="Codigo">
