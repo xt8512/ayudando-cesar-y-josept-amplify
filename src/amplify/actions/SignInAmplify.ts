@@ -34,11 +34,4 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
   } catch (error) {
     console.error("Error signing in:", error);
   }
-
-  // LOGOUT
-  try {
-    await Auth.signOut();
-  } catch (error) {
-    console.log("Error signing out: ", error);
-  }
 }
