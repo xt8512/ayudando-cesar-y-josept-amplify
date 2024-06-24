@@ -1,4 +1,5 @@
 import { handleSendCustomChallengeAnswer } from "@/amplify/actions/SendCustomChallengeAnswer";
+import { handleSignOut } from "@/amplify/actions/SignOut";
 import { handleVerifyOTP } from "@/amplify/actions/VerifyOTP";
 import { useAuth, useOtp } from "@/stores/auth";
 import { useCurrentUser } from "@/stores/auth/useCurrentUser";
@@ -28,6 +29,17 @@ export const Otp = () => {
     }
   };
 
+  const handleVerifyOTPOnlyBackend = async () => {
+    try {
+      // SOLO COPIA ESTO SIXTO
+      await handleVerifyOTP(user, code);
+      // ESTO SOLO ES PORQUE SI NO BACKEND SE ROMPE SU LAMBDA TRIGGER
+      await handleSignOut()
+    } catch (error) {
+    } finally {
+    }
+  }
+
   return (
     <Card>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -51,7 +63,7 @@ export const Otp = () => {
         <CompoundButton
           disabled={code.length < 6}
           secondaryContent="Check"
-          onClick={() => handleVerifyOTP(user, code)}
+          onClick={handleVerifyOTPOnlyBackend}
         >
           VERIFY-TOTP
         </CompoundButton>
