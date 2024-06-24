@@ -20,8 +20,8 @@ type Action = {
 };
 
 export const useAuth = create<State & Action>((set) => ({
-  username: "josehparedes255@gmail.com",
-  password: "Laravel20$$12",
+  username: "jhonatan.valenzuela.19@outlook.com",
+  password: "R6Ut-+L;bd",
   onChange: (ev) =>
     set((state) => ({
       ...state,
