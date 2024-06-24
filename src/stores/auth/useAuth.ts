@@ -23,8 +23,8 @@ type Action = {
 };
 
 export const useAuth = create<State & Action>((set) => ({
-  username: "jhonatan.valenzuela.19@outlook.com",
-  password: "R6Ut-+L;bd",
+  username: import.meta.env.VITE_USERNAME ?? "",
+  password: import.meta.env.VITE_PASSWORD ?? "",
   onChange: (ev) =>
     set((state) => ({
       ...state,
