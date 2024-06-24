@@ -1,4 +1,5 @@
 import { Auth, type CognitoUser } from "@aws-amplify/auth";
+import { generateIdToAmplify } from "./StartConfig";
 
 export async function handleVerifyOTP(
   user: CognitoUser | null,
@@ -7,10 +8,17 @@ export async function handleVerifyOTP(
   if (!user) throw new Error("User is required");
 
   if (user?.challengeName === "CUSTOM_CHALLENGE") {
+    const idClient = generateIdToAmplify();
+
     try {
       const challengeAnswerResponse = await Auth.sendCustomChallengeAnswer(
         user,
-        challengeResponse ?? ""
+        challengeResponse ?? "",
+        {
+          idClient,
+          userAgent: window.navigator.userAgent,
+          channelCode: "BRK",
+        }
       );
       console.log("CUSTOM AUTH: ", challengeAnswerResponse);
 
