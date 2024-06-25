@@ -6,6 +6,7 @@ export async function handleVerifyOTP(
   challengeResponse: string
 ) {
   if (!user) throw new Error("User is required");
+  if (!challengeResponse) throw new Error("ChallengeResponse is required");
 
   if (user?.challengeName === "CUSTOM_CHALLENGE") {
     const idClient = generateIdToAmplify();

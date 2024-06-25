@@ -1,13 +1,7 @@
 import { handleSignInAmplify } from "@/amplify/actions/SignInAmplify";
+import { ActionButton } from "@/libs";
 import { useAuth } from "@/stores/auth/useAuth";
-import {
-  Card,
-  CompoundButton,
-  Field,
-  Input,
-  Spinner,
-} from "@fluentui/react-components";
-import { useState } from "react";
+import { Card, Field, Input } from "@fluentui/react-components";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 // const initState = {
@@ -22,10 +16,8 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 export const Login = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { username, password, onChange } = useAuth();
-  const [loading, setLoading] = useState(false);
 
   const onClick = async () => {
-    setLoading(true);
     try {
       if (!executeRecaptcha)
         throw new Error("Execute recaptcha not yet available");
@@ -39,22 +31,19 @@ export const Login = () => {
       });
     } catch (error) {
       console.log("Error in Login current:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <Card className="row-span-3">
       <div className="grid grid-cols-3 gap-3">
-        <CompoundButton
-          disabled={loading}
-          onClick={onClick}
-          secondaryContent={loading ? "" : "status"}
+        <ActionButton
           className="col-span-1"
-        >
-          {loading ? <Spinner label={"Loading"} /> : "Login in"}
-        </CompoundButton>
+          text="Login in"
+          loadingText="Loading"
+          secondaryContent="status"
+          onClick={onClick}
+        />
 
         <div className="col-span-2">
           <div className="flex flex-col w-full">
