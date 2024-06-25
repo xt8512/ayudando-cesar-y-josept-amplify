@@ -1,5 +1,5 @@
 import { handleSendCustomChallengeAnswer } from "@/amplify/actions/SendCustomChallengeAnswer";
-import { handleSignOut } from "@/amplify/actions/SignOut";
+// import { handleSignOut } from "@/amplify/actions/SignOut";
 import { handleVerifyOTP } from "@/amplify/actions/VerifyOTP";
 import { useAuth, useOtp } from "@/stores/auth";
 import { useCurrentUser } from "@/stores/auth/useCurrentUser";
@@ -34,9 +34,11 @@ export const Otp = () => {
       // SOLO COPIA ESTO SIXTO
       await handleVerifyOTP(user, code);
       // ESTO SOLO ES PORQUE SI NO BACKEND SE ROMPE SU LAMBDA TRIGGER
-      await handleSignOut()
+      // await handleSignOut()
     } catch (error) {
+      //
     } finally {
+      //
     }
   }
 
