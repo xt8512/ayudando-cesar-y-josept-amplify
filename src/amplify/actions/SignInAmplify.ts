@@ -18,7 +18,9 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
   const deviceKey = getDeviceKey(username);
   const idClient = generateIdToAmplify();
 
-  const encryptedRecaptcha = encryptAmiAES(recaptcha);
+  const encryptedRecaptcha = encryptAmiAES(
+    JSON.stringify({ token: recaptcha, clientId: idClient })
+  );
 
   const clientMeta = {
     idClient,
