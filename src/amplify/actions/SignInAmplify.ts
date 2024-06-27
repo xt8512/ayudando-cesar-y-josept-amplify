@@ -1,5 +1,5 @@
 import { Auth } from "@aws-amplify/auth";
-import { generateIdToAmplify, getDeviceKey } from "./StartConfig";
+import { generateIdToAmplify, getDeviceKey, handleStartConfig } from "./StartConfig";
 import { encryptAmiAES } from "@/utils";
 
 export type SignInAmplifyProps = {
@@ -13,6 +13,8 @@ export type SignInAmplifyProps = {
 // const deviceKey = "null" // default
 
 export async function handleSignInAmplify(props: SignInAmplifyProps) {
+  handleStartConfig()
+
   const { username, password, recaptcha } = props;
 
   const deviceKey = getDeviceKey(username);

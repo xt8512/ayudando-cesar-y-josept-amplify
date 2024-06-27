@@ -12,6 +12,7 @@ export const getHeadersAmplify = async () => {
     access_key: accessKeyId,
     secret_key: secretAccessKey,
     id_sesion: sessionToken,
+    // "X-Api-Key": import.meta.env.VITE_X_API_KEY,
   };
 };
 
@@ -31,6 +32,11 @@ export const httpCient = {
   },
   post: async (api: string, path: string, data = {}) => {
     const body = await getBodyAmplify(data);
+
+    console.log(path);    
+
+    console.log(body);    
+
     return RestAPI.post(api, path, body);
   },
   patch: async (api: string, path: string, data = {}) => {

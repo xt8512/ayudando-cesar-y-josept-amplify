@@ -17,6 +17,10 @@ export const previewConfig =  {
   //authenticationFlowType: 'CUSTOM_AUTH',
 };
 
+// NEW CONFIG BY ENV
+
+const REGION_DEFAULT = 'us-east-2';
+
 export const awsConfig = {
   Auth: {
     userPoolId: import.meta.env.VITE_AWS_USER_POOL_ID,
@@ -30,11 +34,23 @@ export const awsConfig = {
       {
         name: "PRUEBA",
         endpoint: import.meta.env.VITE_AWS_API,
-        region: import.meta.env.VITE_AWS_PROJECT_REGION,
+        region: import.meta.env.VITE_AWS_PROJECT_REGION ?? REGION_DEFAULT,
+      },
+      {
+        name: "SEGURIDAD",
+        endpoint: import.meta.env.VITE_AWS_API_SECURITY,
+        region: import.meta.env.VITE_AWS_PROJECT_REGION ?? REGION_DEFAULT,
       }
     ],
   },
 };
 
+export const awsConfigPublic = {
+  ...awsConfig,
+  Auth: {
+    ...awsConfig.Auth,
+    userPoolWebClientId: import.meta.env.VITE_AWS_USER_POOL_WEB_CLIENT_ID_PUBLIC,
+  },
+}
 
 export const apiPath = "https://uz99n3guu8.execute-api.us-east-2.amazonaws.com/TEST/api-seguridad-brokers/authentication/user/corredor/contrasena/recuperar"
