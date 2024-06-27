@@ -12,7 +12,7 @@ export const getHeadersAmplify = async () => {
     access_key: accessKeyId,
     secret_key: secretAccessKey,
     id_sesion: sessionToken,
-    // "X-Api-Key": import.meta.env.VITE_X_API_KEY,
+    "X-Api-Key": import.meta.env.VITE_X_API_KEY,
   };
 };
 
