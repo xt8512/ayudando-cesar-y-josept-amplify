@@ -32,7 +32,7 @@ export const awsConfig = {
   API: {
     endpoints: [
       {
-        name: "PRUEBA",
+        name: "BROKERS",
         endpoint: import.meta.env.VITE_AWS_API,
         region: import.meta.env.VITE_AWS_PROJECT_REGION ?? REGION_DEFAULT,
       },

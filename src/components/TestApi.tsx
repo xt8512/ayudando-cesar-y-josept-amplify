@@ -1,4 +1,5 @@
 import { handleGetQR } from "@/amplify/apis/GetQR";
+import { handleRecoveryPassword } from "@/amplify/apis/RecoveryPassword";
 import { ActionButton } from "@/libs";
 import { Card } from "@fluentui/react-components";
 
@@ -9,6 +10,12 @@ export const TestApi = () => {
         <ActionButton
           onClick={handleGetQR}
           text="QR"
+          loadingText="Procesando"
+        />
+
+        <ActionButton
+          onClick={handleRecoveryPassword}
+          text="BROKERS"
           loadingText="Procesando"
         />
       </div>
