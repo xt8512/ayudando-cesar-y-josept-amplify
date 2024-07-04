@@ -5,14 +5,14 @@ import { handleSignInPublic } from "../actions/SignInPublic";
 
 export const handleRecoveryPassword = async () => {
   const config = await handleStartConfigPublic();
-  console.log(config);  
+  console.log(config);
   
   await handleSignInPublic();
 
   try {
     const currentUser = await Auth.currentUserInfo();
 
-    const email = currentUser.attributes.email;    
+    const email = currentUser.attributes.email;
 
     const response = await httpCient.post(
       "BROKERS",

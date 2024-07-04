@@ -4,15 +4,6 @@ import { useAuth } from "@/stores/auth/useAuth";
 import { Card, Field, Input } from "@fluentui/react-components";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-// const initState = {
-// username: "juanm.hidalgo@softtek.com",
-// password: "L2m9CV35JT@1",
-// username: "josehparedes255@gmail.com",
-// password: "Laravel20$$12",
-// username: "jhonatan.valenzuela.19@outlook.com",
-// password: "R6Ut-+L;bd",
-// };
-
 export const Login = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { username, password, onChange } = useAuth();

@@ -24,6 +24,12 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
     JSON.stringify({ token: recaptcha, clientId: idClient })
   );
 
+  if (!idClient || !encryptedRecaptcha || !deviceKey) {
+    throw new Error(
+      "One or more values in clientMetaData are null or undefined"
+    );
+  }
+
   const clientMeta = {
     idClient,
     userAgent: window.navigator.userAgent,
@@ -31,6 +37,8 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
     deviceKey,
     recaptcha: encryptedRecaptcha,
   };
+
+  console.log("clientMeta", clientMeta);  
 
   // SIGN IN
   try {
