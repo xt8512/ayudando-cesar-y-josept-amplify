@@ -1,4 +1,5 @@
 export * from "./Login"
-export * from "./OTP"
+export * from "./OTPEmail"
 export * from "./SignOut"
-export * from "./TestApi"
+export * from "./QRApi"
+export * from "./BrokersApi"

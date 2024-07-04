@@ -29,6 +29,7 @@ export const ActionButton = ({
     try {
       await onClick(event);
     } catch (error) {
+      console.log(error);      
     } finally {
       setLoading(false);
     }

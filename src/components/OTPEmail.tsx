@@ -6,7 +6,7 @@ import { useAuth, useOtp } from "@/stores/auth";
 import { useCurrentUser } from "@/stores/auth/useCurrentUser";
 import { Card, Field, Input } from "@fluentui/react-components";
 
-export const Otp = () => {
+export const OtpEmail = () => {
   const { username } = useAuth();
   const { code, onChange } = useOtp();
   const { user, setUser } = useCurrentUser();

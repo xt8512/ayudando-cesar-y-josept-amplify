@@ -17,9 +17,9 @@ function getHeadersSeguridad() {
 
 export const getHeadersAmplify = (apiName: string) => {
   const headers = {
-    "BROKERS": getHeadersBrokers(),
-    "SEGURIDAD": getHeadersSeguridad(),
-  }
+    BROKERS: getHeadersBrokers(),
+    SEGURIDAD: getHeadersSeguridad(),
+  };
 
   return headers[apiName as keyof typeof headers];
 };
@@ -34,16 +34,16 @@ export const getBodyAmplify = (apiName: string, data: unknown) => {
 };
 
 export const httpCient = {
-  get: async (api: string, path: string) => {
+  get: async <T>(api: string, path: string): Promise<T> => {
     const options = getHeadersAmplify(api);
     return RestAPI.get(api, path, options);
   },
-  post: async (api: string, path: string, data = {}) => {
+  post: async <T = unknown>(api: string, path: string, data = {}): Promise<T> => {
     const body = getBodyAmplify(api, data);
-    console.log(body);    
+    console.log(body);
     return RestAPI.post(api, path, body);
   },
-  patch: async (api: string, path: string, data = {}) => {
+  patch: async <T>(api: string, path: string, data = {}): Promise<T> => {
     const body = getBodyAmplify(api, data);
     return RestAPI.patch(api, path, body);
   },
