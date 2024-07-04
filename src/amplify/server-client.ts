@@ -1,18 +1,18 @@
-import { Auth } from "@aws-amplify/auth";
+// import { Auth } from "@aws-amplify/auth";
 import { generateIdToAmplify } from "./actions/StartConfig";
 import { RestAPI } from "@aws-amplify/api-rest";
 
 export const getHeadersAmplify = async () => {
   const clientId = generateIdToAmplify();
-  const { accessKeyId, secretAccessKey, sessionToken } =
-    await Auth.currentCredentials();
+  // const { accessKeyId, secretAccessKey, sessionToken } =
+  //   await Auth.currentCredentials();
 
   return {
     "id-client": clientId,
-    access_key: accessKeyId,
-    secret_key: secretAccessKey,
-    id_sesion: sessionToken,
-    "X-Api-Key": import.meta.env.VITE_X_API_KEY,
+    // access_key: accessKeyId,
+    // secret_key: secretAccessKey,
+    // id_sesion: sessionToken,
+    // "X-Api-Key": import.meta.env.VITE_X_API_KEY, 
   };
 };
 
