@@ -1,47 +1,33 @@
-import { handleSendCustomChallengeAnswer } from "@/amplify/actions/SendCustomChallengeAnswer";
-// import { handleSignOut } from "@/amplify/actions/SignOut";
-import { handleVerifyOTP } from "@/amplify/actions/VerifyOTP";
+import { handleAsociativeQR } from "@/amplify/apis/QR/AsociativeQR";
+import { handleDisassociateDevices } from "@/amplify/apis/QR/DisassociateDevice";
+import { handleListDevices } from "@/amplify/apis/QR/ListAssociateDevice";
+import { handleValidateQR } from "@/amplify/apis/QR/ValidateQR";
 import { ActionButton } from "@/libs";
-import { useAuth, useOtp } from "@/stores/auth";
-import { useCurrentUser } from "@/stores/auth/useCurrentUser";
+import { useOtp } from "@/stores/auth";
 import { Card, Field, Input } from "@fluentui/react-components";
 
 export const OtpQR = () => {
-  const { username } = useAuth();
   const { code, onChange } = useOtp();
-  const { user, setUser } = useCurrentUser();
 
-  const handleSendEmail = async () => {
-    const new_user = await handleSendCustomChallengeAnswer(username);
-
-    if (!new_user) throw new Error("User not found");
-
-    setUser(new_user);
+  const onClickAsociative = async () => {
+    await handleAsociativeQR(code)
   };
 
-  const handleVerifyOTPOnlyBackend = async () => {
-    try {
-      // SOLO COPIA ESTO SIXTO
-      await handleVerifyOTP(user, code);
-      // ESTO SOLO ES PORQUE SI NO BACKEND SE ROMPE SU LAMBDA TRIGGER
-      // await handleSignOut()
-    } catch (error) {
-      //
-    } finally {
-      //
-    }
+  const onClickValidate = async () => {
+    await handleValidateQR(code)
   };
+
+  const onClickList = async () => {
+    await handleListDevices()
+  }
+
+  const onClickDisassociate = async () => {
+    await handleDisassociateDevices([])
+  }
 
   return (
     <Card>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <ActionButton
-          text="LOGIN TOTP"
-          secondaryContent={"resend"}
-          loadingText="Enviando correo"
-          onClick={handleSendEmail}
-        />
-
         <Field label="Codigo">
           <Input
             name="code"
@@ -53,10 +39,32 @@ export const OtpQR = () => {
 
         <ActionButton
           disabled={code.length < 6}
-          text="VERIFY-TOTP"
+          text="Validate"
+          secondaryContent={"Check"}
+          loadingText="Validando"
+          onClick={onClickAsociative}
+        />
+
+        <ActionButton
+          disabled={code.length < 6}
+          text="Associate"
           secondaryContent="Check"
-          loadingText="Verificando"
-          onClick={handleVerifyOTPOnlyBackend}
+          loadingText="Asociando"
+          onClick={onClickValidate}
+        />
+
+        <ActionButton
+          text="Listar"
+          secondaryContent="show"
+          loadingText="Obteniendo"
+          onClick={onClickList}
+        />
+
+        <ActionButton
+          text="Disassociate"
+          secondaryContent="clear"
+          loadingText="Limpiando"
+          onClick={onClickDisassociate}
         />
       </div>
     </Card>

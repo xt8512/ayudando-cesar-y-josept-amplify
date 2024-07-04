@@ -12,6 +12,7 @@ import Layout from "@/layout";
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    errorElement: <div>Not Found</div>,
     children: [
       {
         path: "/",

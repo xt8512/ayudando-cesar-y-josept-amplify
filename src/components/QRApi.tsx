@@ -1,4 +1,4 @@
-import { handleGetQR } from "@/amplify/apis/GetQR";
+import { handleGetQR } from "@/amplify/apis/QR/GetQR";
 import { ActionButton } from "@/libs";
 import { Card, Image } from "@fluentui/react-components";
 import { useState } from "react";
