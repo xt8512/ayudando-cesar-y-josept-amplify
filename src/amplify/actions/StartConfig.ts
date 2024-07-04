@@ -1,4 +1,4 @@
-import { awsConfig, awsConfigPublic } from "../config";
+import { awsConfig, awsConfigPublic, awsConfigPublicBrokers } from "../config";
 import { v4 as uuid } from "uuid";
 import { Amplify } from "@aws-amplify/core";
 
@@ -33,4 +33,9 @@ export async function handleStartConfig() {
 export async function handleStartConfigPublic() {
   console.log("iniciando cognito publico");
   return Amplify.configure(awsConfigPublic);
+}
+
+export async function handleStartConfigPublicBrokers() {
+  console.log("iniciando cognito publico brokers");
+  return Amplify.configure(awsConfigPublicBrokers);
 }

@@ -53,4 +53,15 @@ export const awsConfigPublic = {
   },
 }
 
+export const awsConfigPublicBrokers = {
+  ...awsConfig,
+  Auth: {
+    identityPoolId: import.meta.env.VITE_BROKERS_AWS_COGNITO_POOL_IDENTITY_ID_PUBLIC,
+    region: import.meta.env.VITE_BROKERS_AWS_REGION_PUBLIC,
+    userPoolId: import.meta.env.VITE_BROKERS_AWS_POOLS_ID_PUBLIC,
+    userPoolWebClientId: import.meta.env.VITE_BROKERS_AWS_POOLS_WEB_CLIENT_ID_PUBLIC,
+    mandatorySignIn: true,
+  },
+}
+
 export const apiPath = "https://uz99n3guu8.execute-api.us-east-2.amazonaws.com/TEST/api-seguridad-brokers/authentication/user/corredor/contrasena/recuperar"

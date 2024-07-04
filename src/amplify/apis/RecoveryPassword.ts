@@ -1,22 +1,17 @@
-import { Auth } from "@aws-amplify/auth";
 import { httpCient } from "../server-client";
-import { handleStartConfigPublic } from "../actions/StartConfig";
-import { handleSignInPublic } from "../actions/SignInPublic";
+import { handleStartConfigPublicBrokers } from "../actions/StartConfig";
+import { handleSignInPublicBrokers } from "../actions/SignInPublicBrokers";
 
 export const handleRecoveryPassword = async () => {
-  const config = await handleStartConfigPublic();
-  console.log(config);
-  
-  await handleSignInPublic();
+  await handleStartConfigPublicBrokers();
+  await handleSignInPublicBrokers();
 
   try {
-    const currentUser = await Auth.currentUserInfo();
-
-    const email = currentUser.attributes.email;
+    const email = import.meta.env.VITE_USERNAME
 
     const response = await httpCient.post(
       "BROKERS",
-      "/authentication/user/corredor/contrasena/recuperar",
+      "/api-seguridad-brokers/authentication/user/corredor/contrasena/recuperar",
       { email }
     );
 
