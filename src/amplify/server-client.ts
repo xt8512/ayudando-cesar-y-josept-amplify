@@ -1,23 +1,31 @@
-// import { Auth } from "@aws-amplify/auth";
 import { generateIdToAmplify } from "./actions/StartConfig";
 import { RestAPI } from "@aws-amplify/api-rest";
 
-export const getHeadersAmplify = async () => {
+function getHeadersBrokers() {
   const clientId = generateIdToAmplify();
-  // const { accessKeyId, secretAccessKey, sessionToken } =
-  //   await Auth.currentCredentials();
 
   return {
     "id-client": clientId,
-    // access_key: accessKeyId,
-    // secret_key: secretAccessKey,
-    // id_sesion: sessionToken,
-    // "X-Api-Key": import.meta.env.VITE_X_API_KEY, 
   };
+}
+
+function getHeadersSeguridad() {
+  return {
+    "X-Api-Key": import.meta.env.VITE_X_API_KEY,
+  };
+}
+
+export const getHeadersAmplify = (apiName: string) => {
+  const headers = {
+    "BROKERS": getHeadersBrokers(),
+    "SEGURIDAD": getHeadersSeguridad(),
+  }
+
+  return headers[apiName as keyof typeof headers];
 };
 
-export const getBodyAmplify = async (data: unknown) => {
-  const headers = await getHeadersAmplify();
+export const getBodyAmplify = (apiName: string, data: unknown) => {
+  const headers = getHeadersAmplify(apiName);
 
   return {
     headers,
@@ -27,20 +35,16 @@ export const getBodyAmplify = async (data: unknown) => {
 
 export const httpCient = {
   get: async (api: string, path: string) => {
-    const options = await getHeadersAmplify();
+    const options = getHeadersAmplify(api);
     return RestAPI.get(api, path, options);
   },
   post: async (api: string, path: string, data = {}) => {
-    const body = await getBodyAmplify(data);
-
-    console.log(path);    
-
+    const body = getBodyAmplify(api, data);
     console.log(body);    
-
     return RestAPI.post(api, path, body);
   },
   patch: async (api: string, path: string, data = {}) => {
-    const body = await getBodyAmplify(data);
+    const body = getBodyAmplify(api, data);
     return RestAPI.patch(api, path, body);
   },
 };
