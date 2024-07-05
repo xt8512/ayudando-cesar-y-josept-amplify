@@ -8,28 +8,28 @@ import { Card, Field, Input } from "@fluentui/react-components";
 
 export const OtpQR = () => {
   const { code, onChange } = useOtp();
-  const { setDevices, listDevices } = useDevices()
-  const username = useAuth(state=>state.username)
+  const { setDevices, listDevices } = useDevices();
+  const username = useAuth((state) => state.username);
 
   const onClickAsociative = async () => {
-    await handleAsociativeQR(username,code)
+    await handleAsociativeQR(username, code);
   };
 
   const onClickValidate = async () => {
-    await handleValidateQR(username,code)
+    await handleValidateQR(username, code);
   };
 
   const onClickList = async () => {
-    const response = await handleListDevices(username)
+    const response = await handleListDevices(username);
 
-    if(!response) return
+    if (!response) return;
 
-    setDevices(response.payload.data.map(device=>device.id))
-  }
+    setDevices(response.payload.data.map((device) => device.id));
+  };
 
   const onClickDisassociate = async () => {
-    await handleDisassociateDevices(username, listDevices)
-  }
+    await handleDisassociateDevices(username, listDevices);
+  };
 
   return (
     <Card>
@@ -45,17 +45,17 @@ export const OtpQR = () => {
 
         <ActionButton
           disabled={code.length < 6}
-          text="Validate"
-          secondaryContent={"Check"}
-          loadingText="Validando"
+          text="Associate"
+          secondaryContent="Check"
+          loadingText="Asociando"
           onClick={onClickAsociative}
         />
 
         <ActionButton
           disabled={code.length < 6}
-          text="Associate"
-          secondaryContent="Check"
-          loadingText="Asociando"
+          text="Validate"
+          secondaryContent={"Check"}
+          loadingText="Validando"
           onClick={onClickValidate}
         />
 
