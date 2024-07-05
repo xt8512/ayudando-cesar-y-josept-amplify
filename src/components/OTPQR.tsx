@@ -3,11 +3,12 @@ import { handleDisassociateDevices } from "@/amplify/apis/QR/DisassociateDevice"
 import { handleListDevices } from "@/amplify/apis/QR/ListAssociateDevice";
 import { handleValidateQR } from "@/amplify/apis/QR/ValidateQR";
 import { ActionButton } from "@/libs";
-import { useAuth, useOtp } from "@/stores/auth";
+import { useAuth, useDevices, useOtp } from "@/stores/auth";
 import { Card, Field, Input } from "@fluentui/react-components";
 
 export const OtpQR = () => {
   const { code, onChange } = useOtp();
+  const { setDevices, listDevices } = useDevices()
   const username = useAuth(state=>state.username)
 
   const onClickAsociative = async () => {
@@ -19,11 +20,15 @@ export const OtpQR = () => {
   };
 
   const onClickList = async () => {
-    await handleListDevices(username)
+    const response = await handleListDevices(username)
+
+    if(!response) return
+
+    setDevices(response.payload.data.map(device=>device.id))
   }
 
   const onClickDisassociate = async () => {
-    await handleDisassociateDevices(username, [])
+    await handleDisassociateDevices(username, listDevices)
   }
 
   return (
