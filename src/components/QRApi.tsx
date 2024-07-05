@@ -1,13 +1,15 @@
 import { handleGetQR } from "@/amplify/apis/QR/GetQR";
 import { ActionButton } from "@/libs";
+import { useAuth } from "@/stores/auth";
 import { Card, Image } from "@fluentui/react-components";
 import { useState } from "react";
 
 export const QRApi = () => {
+  const username = useAuth((state)=>state.username)
   const [image, setImage] = useState("");
 
   async function onClickGetQR() {
-    const response = await handleGetQR();
+    const response = await handleGetQR(username);
 
     if (!response) return;
 

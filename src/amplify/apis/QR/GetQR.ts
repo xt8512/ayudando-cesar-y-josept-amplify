@@ -14,7 +14,7 @@ type ResponseSecurityQR = {
   image: string;
 };
 
-export const handleGetQR = async () => {
+export const handleGetQR = async (username:string) => {
   await handleStartConfigPublic();
   await handleSignInPublic();
 
@@ -29,6 +29,7 @@ export const handleGetQR = async () => {
       {
         identifier: user.attributes.sub,
         clientId,
+        username
       }
     );
 

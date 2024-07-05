@@ -5,8 +5,8 @@ import { Link, Outlet } from "react-router-dom";
 export const Layout: FC = () => {
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="absolute top-0 p-2">
-        <div className="flex gap-3 select-none">
+      <div className="absolute p-2 md:left-0">
+        <div className="flex gap-3 md:flex-col select-none">
           <Link to="/">
             <Button>Login</Button>
           </Link>
