@@ -13,7 +13,10 @@ type ResponseSecurityQRDisassociate = {
   username: string;
 };
 
-export const handleDisassociateDevices = async (username: string, listDevices: number[]) => {
+export const handleDisassociateDevices = async (
+  username: string,
+  listDevices: number[]
+) => {
   await handleStartConfigPublic();
   await handleSignInPublic();
 
@@ -26,7 +29,7 @@ export const handleDisassociateDevices = async (username: string, listDevices: n
     >("SEGURIDAD", "/security/qr/disassociate", {
       identifier: username,
       clientId,
-      listDevices
+      listDevices,
     });
 
     console.log(response);
