@@ -38,6 +38,7 @@ export const ActionButton = ({
   return (
     <CompoundButton
       {...props}
+      className="select-none"
       disabled={loading || props.disabled}
       secondaryContent={loading ? "" : props.secondaryContent}
       onClick={nextStep}

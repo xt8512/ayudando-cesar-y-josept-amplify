@@ -1,14 +1,12 @@
+import { generateIdToAmplify } from "@/amplify/constants";
 import { handleSignInPublic } from "../../actions/SignInPublic";
-import {
-  generateIdToAmplify,
-  handleStartConfigPublic,
-} from "../../actions/StartConfig";
+import { handleStartConfigPublic } from "../../actions/StartConfig";
 import { httpCient } from "../../server-client";
 import type { ResponseAmplify } from "../../types/Amplify.Response";
 
 type Device = {
-   id: number;
-}
+  id: number;
+};
 
 type ResponseSecurityQRList = {
   clientId: string;
@@ -17,7 +15,7 @@ type ResponseSecurityQRList = {
   username: string;
 };
 
-export const handleListDevices = async (username:string) => {
+export const handleListDevices = async (username: string) => {
   await handleStartConfigPublic();
   await handleSignInPublic();
 

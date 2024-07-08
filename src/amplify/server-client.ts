@@ -1,5 +1,5 @@
-import { generateIdToAmplify } from "./actions/StartConfig";
 import { RestAPI } from "@aws-amplify/api-rest";
+import { generateIdToAmplify } from "./constants";
 
 function getHeadersBrokers() {
   const clientId = generateIdToAmplify();

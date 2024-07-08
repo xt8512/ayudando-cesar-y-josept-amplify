@@ -1,8 +1,6 @@
+import { generateIdToAmplify } from "@/amplify/constants";
 import { handleSignInPublic } from "../../actions/SignInPublic";
-import {
-  generateIdToAmplify,
-  handleStartConfigPublic,
-} from "../../actions/StartConfig";
+import { handleStartConfigPublic } from "../../actions/StartConfig";
 import { httpCient } from "../../server-client";
 import type { ResponseAmplify } from "../../types/Amplify.Response";
 

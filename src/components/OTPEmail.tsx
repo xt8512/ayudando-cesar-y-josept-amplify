@@ -1,10 +1,9 @@
 import { handleSendCustomChallengeAnswer } from "@/amplify/actions/SendCustomChallengeAnswer";
-// import { handleSignOut } from "@/amplify/actions/SignOut";
 import { handleVerifyOTP } from "@/amplify/actions/VerifyOTP";
 import { ActionButton } from "@/libs";
 import { useAuth, useOtp } from "@/stores/auth";
 import { useCurrentUser } from "@/stores/auth/useCurrentUser";
-import { Card, Field, Input } from "@fluentui/react-components";
+import { Card, Checkbox, Field, Input } from "@fluentui/react-components";
 
 export const OtpEmail = () => {
   const { username } = useAuth();
@@ -42,14 +41,18 @@ export const OtpEmail = () => {
           onClick={handleSendEmail}
         />
 
-        <Field label="Codigo">
-          <Input
-            name="code"
-            value={code}
-            onChange={onChange}
-            placeholder="Ejm: 123456"
-          />
-        </Field>
+        <div>
+          <Field label="Codigo">
+            <Input
+              name="code"
+              value={code}
+              onChange={onChange}
+              placeholder="Ejm: 123456"
+            />
+          </Field>
+
+          <Checkbox label="Remember this device" className="select-none" />
+        </div>
 
         <ActionButton
           disabled={code.length < 6}

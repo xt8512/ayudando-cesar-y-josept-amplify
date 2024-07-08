@@ -1,5 +1,5 @@
 import { handleSignInAmplify } from "@/amplify/actions/SignInAmplify";
-import { ActionButton } from "@/libs";
+import { ActionButton, PasswordField } from "@/libs";
 import { useAuth } from "@/stores/auth/useAuth";
 import { Card, Field, Input } from "@fluentui/react-components";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -41,13 +41,9 @@ export const Login = () => {
             <Field label="Usuario">
               <Input value={username} name="username" onChange={onChange} />
             </Field>
+
             <Field label="Contraseña">
-              <Input
-                value={password}
-                name="password"
-                type="password"
-                onChange={onChange}
-              />
+              <PasswordField value={password} onChange={onChange} />
             </Field>
           </div>
         </div>

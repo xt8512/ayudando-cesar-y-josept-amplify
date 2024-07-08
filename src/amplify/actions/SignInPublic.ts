@@ -1,5 +1,5 @@
 import { Auth } from "@aws-amplify/auth";
-import { generateIdToAmplify } from "./StartConfig";
+import { generateIdToAmplify } from "../constants";
 
 export async function handleSignInPublic() {
   const idClient = generateIdToAmplify();

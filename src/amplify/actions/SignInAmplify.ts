@@ -1,6 +1,7 @@
 import { Auth } from "@aws-amplify/auth";
-import { generateIdToAmplify, getDeviceKey, handleStartConfig } from "./StartConfig";
+import { handleStartConfig } from "./StartConfig";
 import { encryptAmiAES } from "@/utils";
+import { generateIdToAmplify, getDeviceKey } from "../constants";
 
 export type SignInAmplifyProps = {
   username: string;
@@ -13,11 +14,11 @@ export type SignInAmplifyProps = {
 // const deviceKey = "null" // default
 
 export async function handleSignInAmplify(props: SignInAmplifyProps) {
-  handleStartConfig()
+  handleStartConfig();
 
   const { username, password, recaptcha } = props;
 
-  const deviceKey = getDeviceKey(username);
+  const deviceKey = getDeviceKey();
   const idClient = generateIdToAmplify();
 
   const encryptedRecaptcha = encryptAmiAES(
@@ -38,7 +39,7 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
     recaptcha: encryptedRecaptcha,
   };
 
-  console.log("clientMeta", clientMeta);  
+  console.log("clientMeta", clientMeta);
 
   // SIGN IN
   try {

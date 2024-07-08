@@ -1,5 +1,5 @@
 import { Auth } from "@aws-amplify/auth";
-import { generateIdToAmplify } from "./StartConfig";
+import { generateIdToAmplify } from "../constants";
 
 export const handleSendCustomChallengeAnswer = async (username: string) => {
   const idClient = generateIdToAmplify();

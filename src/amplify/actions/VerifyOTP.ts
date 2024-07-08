@@ -1,5 +1,5 @@
 import { Auth, type CognitoUser } from "@aws-amplify/auth";
-import { generateIdToAmplify } from "./StartConfig";
+import { generateIdToAmplify, getDeviceKeyInCognito, setDeviceKey } from "../constants";
 
 export async function handleVerifyOTP(
   user: CognitoUser | null,
@@ -22,6 +22,13 @@ export async function handleVerifyOTP(
         }
       );
       console.log("CUSTOM AUTH: ", challengeAnswerResponse);
+
+      const signInUserSession = challengeAnswerResponse.signInUserSession;
+
+      if(!signInUserSession) throw new Error("signInUserSession is required");
+
+      const deviceKey = getDeviceKeyInCognito(user.getUsername());
+      setDeviceKey(deviceKey);
 
       const currentSession = await Auth.currentSession();
       console.log("CURRENT_SESSION: ", currentSession);
