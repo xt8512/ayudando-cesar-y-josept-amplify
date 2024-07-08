@@ -4,6 +4,10 @@ import { Amplify } from "@aws-amplify/core";
 
 const STORAGE_KEY_CLIENT_ID = "clientId";
 
+export function setClientId(clientId: string) {
+  localStorage.setItem(STORAGE_KEY_CLIENT_ID, clientId);
+}
+
 export function generateIdToAmplify() {
   const StorageClientId = localStorage.getItem(STORAGE_KEY_CLIENT_ID);
 
@@ -12,7 +16,7 @@ export function generateIdToAmplify() {
   }
 
   const clientId = uuid();
-  localStorage.setItem(STORAGE_KEY_CLIENT_ID, clientId);
+  setClientId(clientId);
 
   return clientId;
 }
