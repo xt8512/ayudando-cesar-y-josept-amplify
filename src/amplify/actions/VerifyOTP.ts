@@ -23,10 +23,6 @@ export async function handleVerifyOTP(
       );
       console.log("CUSTOM AUTH: ", challengeAnswerResponse);
 
-      const signInUserSession = challengeAnswerResponse.signInUserSession;
-
-      if(!signInUserSession) throw new Error("signInUserSession is required");
-
       const deviceKey = getDeviceKeyInCognito(user.getUsername());
       setDeviceKey(deviceKey);
 

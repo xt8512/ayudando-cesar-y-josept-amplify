@@ -46,6 +46,8 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
   try {
     await Auth.signIn(username, password, clientMeta);
   } catch (error) {
+    console.error(error);    
+
     throw ErrorCatch(error as Error);
   }
 }
