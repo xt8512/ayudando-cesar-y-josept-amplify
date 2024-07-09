@@ -2,6 +2,7 @@ import { Auth } from "@aws-amplify/auth";
 import { handleStartConfig } from "./StartConfig";
 import { encryptAmiAES } from "@/utils";
 import { generateIdToAmplify, getDeviceKey } from "../constants";
+import { ErrorCatch } from "../errors/Error.Catch";
 
 export type SignInAmplifyProps = {
   username: string;
@@ -45,6 +46,6 @@ export async function handleSignInAmplify(props: SignInAmplifyProps) {
   try {
     await Auth.signIn(username, password, clientMeta);
   } catch (error) {
-    console.error("Error signing in:", error);
+    throw ErrorCatch(error as Error);
   }
 }

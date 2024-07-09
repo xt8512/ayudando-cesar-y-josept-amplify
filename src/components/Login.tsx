@@ -1,11 +1,14 @@
 import { handleSignInAmplify } from "@/amplify/actions/SignInAmplify";
+import { AmplifyError } from "@/amplify/types/Amplify.Error";
 import { ActionButton, PasswordField } from "@/libs";
 import { useAuth } from "@/stores/auth/useAuth";
+import { useDispatchToast } from "@/utils";
 import { Card, Field, Input } from "@fluentui/react-components";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export const Login = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
+  const { notify } = useDispatchToast();
   const { username, password, onChange } = useAuth();
 
   const onClick = async () => {
@@ -21,7 +24,17 @@ export const Login = () => {
         recaptcha,
       });
     } catch (error) {
-      console.log("Error in Login current:", error);
+      const error_catch = error as AmplifyError | string;
+
+      if (
+        error &&
+        typeof error_catch !== "string" &&
+        error_catch.details.includes("redirectToOtp")
+      ) {
+        notify.success("Redirect to OTP");
+      } else {
+        notify.error("Error in login");
+      }
     }
   };
 

@@ -1,8 +1,11 @@
-import { Button } from "@fluentui/react-components";
+import { useDispatchToast } from "@/utils";
+import { Button, Toaster } from "@fluentui/react-components";
 import type { FC } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 export const Layout: FC = () => {
+  const { toasterId } = useDispatchToast();
+
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="absolute p-2 md:left-0">
@@ -22,6 +25,8 @@ export const Layout: FC = () => {
       <main className="flex flex-col gap-3">
         <Outlet />
       </main>
+
+      <Toaster toasterId={toasterId} />
     </div>
   );
 };
