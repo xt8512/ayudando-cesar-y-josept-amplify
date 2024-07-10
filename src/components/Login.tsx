@@ -1,4 +1,5 @@
 import { handleSignInAmplify } from "@/amplify/actions/SignInAmplify";
+import { LoginCatch } from "@/amplify/errors/notification";
 import { AmplifyError } from "@/amplify/types/Amplify.Error";
 import { ActionButton, PasswordField } from "@/libs";
 import { useAuth } from "@/stores/auth/useAuth";
@@ -24,17 +25,9 @@ export const Login = () => {
         recaptcha,
       });
     } catch (error) {
-      const error_catch = error as AmplifyError | string;
+      const found = LoginCatch(error as AmplifyError | string)
 
-      if (
-        error &&
-        typeof error_catch !== "string" &&
-        error_catch.details.includes("redirectToOtp")
-      ) {
-        notify.success("Redirect to OTP");
-      } else {
-        notify.error("Error in login");
-      }
+      notify.custom(found.message, found.type)
     }
   };
 

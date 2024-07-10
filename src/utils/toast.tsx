@@ -1,6 +1,10 @@
 import { useToastStore } from "@/stores/utils";
 import { ToastBase } from "@/libs";
-import { useId, useToastController } from "@fluentui/react-components";
+import {
+  type ToastIntent,
+  useId,
+  useToastController,
+} from "@fluentui/react-components";
 import { useEffect } from "react";
 
 export const useDispatchToast = () => {
@@ -28,6 +32,9 @@ export const useDispatchToast = () => {
     },
     warning: (message: string) => {
       dispatchToast(<ToastBase title={message} />, { intent: "warning" });
+    },
+    custom: (message: string, intent: ToastIntent) => {
+      dispatchToast(<ToastBase title={message} />, { intent });
     },
   };
 
