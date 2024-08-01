@@ -10,8 +10,11 @@ function getHeadersBrokers() {
 }
 
 function getHeadersSeguridad() {
+  const clientId = generateIdToAmplify();
+
   return {
     "X-Api-Key": import.meta.env.VITE_X_API_KEY,
+    "id-client": clientId,
   };
 }
 
